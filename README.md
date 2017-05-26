@@ -27,6 +27,7 @@ public class PersonRepository : MongoDbRepository
 例如：
 
 [MongoDbCollection("person")]
+
 public class PersonEntity
 {
     public ObjectId Id { get; set; }
