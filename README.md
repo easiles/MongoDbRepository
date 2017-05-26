@@ -12,13 +12,18 @@ mongodb.driver 2.4.3
 新建仓储类需要继承MongoDbRepository类，在该类中有一个构造方法需要传入连接字符串和操作的database
 例如：
 
+
 public class PersonRepository : MongoDbRepository
 {
+
     private static readonly string _connectionString = "mongodb://localhost:27017";
+    
     private static readonly string _databaseName = "BaseData";
+    
     public PersonRepository() : base(_connectionString, _databaseName)
     {
     }
+    
 }
 
 
@@ -45,12 +50,15 @@ public class PersonEntity
 
 var person = new PersonEntity()
 {
+
     Id = ObjectId.GenerateNewId(),
     Name = "我是测试",
     Age = 18,
     Birthday = DateTime.Parse("1999-01-01"),
+    
 };
 _personRepository.InsertOne<PersonEntity>(person);
+
 //_personRepository.InsertOneAsync<PersonEntity>(person);
 
 
@@ -58,6 +66,7 @@ _personRepository.InsertOne<PersonEntity>(person);
 
 var list = new List<PersonEntity>()
 {
+
     new PersonEntity()
     {
         Id = ObjectId.GenerateNewId(),
@@ -72,20 +81,24 @@ var list = new List<PersonEntity>()
         Age = 18,
         Birthday = DateTime.Parse("1999-01-01"),
     }
+    
 };
 _personRepository.InsertMany<PersonEntity>(list);
+
 //_personRepository.InsertManyAsync<PersonEntity>(list);
 
 
 删除
 
 _personRepository.DeleteOne<PersonEntity>(p => p.Age == 18);
+
 //_personRepository.DeleteOneAsync<PersonEntity>(p => p.Age == 18);
 
 
 批量删除：
 
 _personRepository.DeleteMany<PersonEntity>(p => p.Age == 18);
+
 //_personRepository.DeleteManyAsync<PersonEntity>(p => p.Age == 18);
 
 
@@ -93,7 +106,9 @@ _personRepository.DeleteMany<PersonEntity>(p => p.Age == 18);
 注：修改封装了FindOneAndReplace方法，特别注意，先要查找到数据，才可修改，不然会报错。
 
 var list = _personRepository.Find<PersonEntity>(p => p.Age == 18);
+
 var person = list.FirstOrDefault(p => p.Age == 18);
+
 person.Name = "这是测试测试0";
 
 
