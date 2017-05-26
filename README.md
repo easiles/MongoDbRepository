@@ -54,6 +54,7 @@ _personRepository.InsertOne<PersonEntity>(person);
 
 
 批量插入
+
 var list = new List<PersonEntity>()
 {
     new PersonEntity()
@@ -76,11 +77,13 @@ _personRepository.InsertMany<PersonEntity>(list);
 
 
 删除
+
 _personRepository.DeleteOne<PersonEntity>(p => p.Age == 18);
 //_personRepository.DeleteOneAsync<PersonEntity>(p => p.Age == 18);
 
 
 批量删除：
+
 _personRepository.DeleteMany<PersonEntity>(p => p.Age == 18);
 //_personRepository.DeleteManyAsync<PersonEntity>(p => p.Age == 18);
 
